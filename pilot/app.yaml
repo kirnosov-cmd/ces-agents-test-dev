@@ -1,0 +1,9 @@
+displayName: pilot
+rootAgent: root_agent
+loggingSettings:
+  conversationLoggingSettings: {}
+guardrails:
+- Safety Guardrail 1765327314988
+- Prompt Guardrail 1765327314988
+timeZoneSettings:
+  timeZone: America/Los_Angeles

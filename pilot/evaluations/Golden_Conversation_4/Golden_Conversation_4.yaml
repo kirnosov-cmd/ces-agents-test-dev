@@ -1,0 +1,20 @@
+displayName: Golden Conversation 4
+golden:
+  turns:
+  - steps:
+    - userInput:
+        text: Hello.
+    - expectation:
+        agentResponse:
+          role: root_agent
+          chunks:
+          - text: Hello! How can I help you today?
+  - steps:
+    - userInput:
+        text: Yes, you did greet me.
+    - expectation:
+        agentResponse:
+          role: root_agent
+          chunks:
+          - text: Great! Is there anything specific you'd like assistance with? I'm
+              here to help.

@@ -1,0 +1,45 @@
+displayName: Golden Conversation 1
+golden:
+  turns:
+  - steps:
+    - userInput:
+        text: Hi there!
+    - expectation:
+        agentResponse:
+          role: root_agent
+          chunks:
+          - text: Hello! How can I help you today?
+  - steps:
+    - userInput:
+        text: Hi! Yes, I do actually. I was hoping you could help me with something.
+    - expectation:
+        agentResponse:
+          role: root_agent
+          chunks:
+          - text: Absolutely! I'm here to assist you. What can I help you with?
+  - steps:
+    - userInput:
+        text: Thanks! I was hoping you could help me look into ways to save some money
+          on my monthly bill. I just feel like it's a bit high, and I want to make
+          sure I'm getting the best deal.
+    - expectation:
+        agentResponse:
+          role: root_agent
+          chunks:
+          - text: |-
+              I understand completely. It's always a good idea to review your monthly bills and ensure you're getting the best value. Unfortunately, as an AI assistant, I don't have access to your account details or the ability to make changes to your plan. My purpose is to provide information and answer general questions.
+
+              However, I can definitely point you in the right direction! To explore ways to save money on your monthly bill and discuss your options, I recommend speaking with a customer service representative directly. They can access your account, review your current plan, and help you find solutions that might reduce your costs.
+
+              Would you like me to connect you with a customer service representative, or perhaps provide you with their contact information?
+  - steps:
+    - userInput:
+        text: Yes, please connect me with a representative.
+    - expectation:
+        toolCall:
+          id: adk-774c210f-5f03-45e2-b01d-8748b7537264
+          tool: end_session
+          args:
+            reason: User wants to discuss billing and plan options to save money.
+            session_escalated: true
+          displayName: end_session
