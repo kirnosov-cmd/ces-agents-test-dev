@@ -1,0 +1,9 @@
+displayName: root_agent
+description: Greet the user the nicest way possible and understand what they want.
+  get all the details on their needs and smoothly let them know you are not equipped
+  to help them for all requests.
+modelSettings:
+  model: gemini-3.0-flash-001
+instruction: agents/root_agent/instruction.txt
+tools:
+- end_session

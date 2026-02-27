@@ -1,0 +1,20 @@
+displayName: Info gatherer
+rootAgent: root_agent
+audioProcessingConfig:
+  synthesizeSpeechConfigs:
+    en-US:
+      voice: en-US-Chirp3-HD-Orus
+      speakingRate: 0.97
+loggingSettings:
+  audioRecordingConfig: {}
+  conversationLoggingSettings: {}
+variableDeclarations:
+- name: browser_task_description
+  schema:
+    type: STRING
+languageSettings:
+  defaultLanguageCode: en-US
+defaultChannelProfile: {}
+timeZoneSettings:
+  timeZone: America/Los_Angeles
+toolExecutionMode: PARALLEL

@@ -1,0 +1,68 @@
+displayName: Golden Conversation 1
+golden:
+  turns:
+  - steps:
+    - userInput:
+        text: hello
+    - expectation:
+        agentResponse:
+          role: root_agent
+          chunks:
+          - text: Hello! It is such a pleasure to meet you. I hope you're having a
+              wonderful day so far! How can I help you today? Please feel free to
+              share any details about what you're looking for so I can understand
+              your needs perfectly.
+  - steps:
+    - userInput:
+        text: help me dont just understand
+    - expectation:
+        agentResponse:
+          role: root_agent
+          chunks:
+          - text: I would be more than happy to help! To ensure I provide you with
+              the best possible assistance, could you please tell me a little more
+              about what you need help with? The more details you can provide about
+              your specific request, the better I can understand how to support you.
+  - steps:
+    - userInput:
+        text: print money
+    - expectation:
+        agentResponse:
+          role: root_agent
+          chunks:
+          - text: That is certainly a unique request! To make sure I fully understand,
+              could you tell me a bit more about what you mean by "printing money"?
+              For example, are you looking for information on how currency is officially
+              produced by central banks, or perhaps you're interested in the history
+              of money and how it's made? Any additional details you can provide would
+              be very helpful!
+  - steps:
+    - userInput:
+        text: 'just printf money '
+    - expectation:
+        agentResponse:
+          role: root_agent
+          chunks:
+          - text: |-
+              Thank you for clarifying that you're looking for a way to print money. I appreciate you being direct about your request.
+
+              Now that I have a clear understanding of what you are looking for, I must sincerely apologize. My current design and capabilities do not equip me to handle requests related to the production of currency or providing instructions on how to print money. While I aim to be as helpful as possible, this specific task falls outside of what I am able to do. I appreciate you taking the time to share your needs with me!
+  - steps:
+    - userInput:
+        text: you can't prinnt money?
+    - expectation:
+        agentResponse:
+          role: root_agent
+          chunks:
+          - text: |+
+              I understand your question, and I apologize for any disappointment. To be as clear as possible, I am not equipped with the physical or digital capabilities to print currency or facilitate the creation of money in any way. My design is limited, and I am unable to fulfill this or other requests. I truly appreciate your understanding!
+
+    - expectation:
+        toolCall:
+          id: adk-0cd45a1b-77e4-4691-a197-776e13fa8a76
+          tool: end_session
+          args:
+            reason: The user's request to print money falls outside of the agent's
+              capabilities, and the limitation has been communicated.
+            session_escalated: false
+          displayName: end_session
