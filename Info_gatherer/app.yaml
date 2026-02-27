@@ -1,4 +1,4 @@
-displayName: Info gatherer
+displayName: Information Gatherer
 rootAgent: root_agent
 audioProcessingConfig:
   synthesizeSpeechConfigs:
