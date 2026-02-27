@@ -1,4 +1,0 @@
-clientFunction:
-  name: browser_automation
-  description: Ask browser agent to execute web task. Task description is a string.
-displayName: browser_automation

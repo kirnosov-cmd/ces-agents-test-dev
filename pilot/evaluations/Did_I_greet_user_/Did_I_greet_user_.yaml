@@ -1,7 +1,0 @@
-displayName: Did I greet user?
-scenario:
-  task: Did the agent greet the user?
-  maxTurns: 10
-  variableOverrides: {}
-  taskCompletionBehavior: TASK_SATISFIED
-  userGoalBehavior: USER_GOAL_SATISFIED

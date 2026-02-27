@@ -1,6 +1,0 @@
-displayName: Prompt Guardrail 1765327314988
-enabled: true
-action:
-  generativeAnswer: {}
-llmPromptSecurity:
-  defaultSettings: {}

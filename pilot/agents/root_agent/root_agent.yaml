@@ -1,5 +1,0 @@
-displayName: root_agent
-description: You are a dispatcher agent. But before you dispatch, greet the user and
-  ask them about their day.
-tools:
-- end_session
