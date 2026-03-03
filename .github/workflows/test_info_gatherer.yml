@@ -1,0 +1,63 @@
+name: "CI Test Info gatherer oauth test 3"
+
+on:
+  pull_request:
+    paths:
+      - 'Info_gatherer/**/*.yaml'
+      - 'Info_gatherer/**/*.json'
+
+env:
+  PROJECT_ID: "YOUR_PROJECT_ID"
+  LOCATION: "YOUR_LOCATION"
+  # Store your OAuth Token string in GitHub Secrets
+  CXAS_OAUTH_TOKEN: ${{ secrets.CXAS_OAUTH_TOKEN }}
+
+jobs:
+  test-info_gatherer_oauth_test_3:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Authentication is handled via the CXAS_OAUTH_TOKEN environment variable defined above.
+      # No separate auth step is necessary.
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker Auth
+        run: gcloud auth configure-docker us-central1-docker.pkg.dev
+
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          load: true
+          tags: agent-image
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Run CI Test Lifecycle (Docker)
+        run: |
+          docker run --rm \
+            -v ${ github.workspace }:/workspace \
+            -w /workspace \
+            -e PROJECT_ID=${{ env.PROJECT_ID }} \
+            -e LOCATION=${{ env.LOCATION }} \
+            -e GOOGLE_APPLICATION_CREDENTIALS=/workspace/application_default_credentials.json \
+            -v ${ steps.auth.outputs.credentials_file_path }:/workspace/application_default_credentials.json \
+            agent-image \
+            ci-test --agent_dir /usr/local/google/home/sethus/git_repos/test_agents/ces-agents-test-dev/Info_gatherer/ \
+                      --project_id ${{ env.PROJECT_ID }} \
+                      --location ${{ env.LOCATION }} \
+                      --display_name "[CI] PR-${{ github.event.pull_request.number }} Info gatherer oauth test 3"
+
