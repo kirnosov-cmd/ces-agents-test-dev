@@ -55,7 +55,7 @@ jobs:
             -w /workspace \
             -e PROJECT_ID=${{ env.PROJECT_ID }} \
             -e LOCATION=${{ env.LOCATION }} \
-            -e CXAS_OAUTH_TOKEN=${{{{ env.CXAS_OAUTH_TOKEN }}}} \
+            -e CXAS_OAUTH_TOKEN=${{ env.CXAS_OAUTH_TOKEN }} \
             agent-image \
             ci-test --agent_dir /usr/local/google/home/sethus/git_repos/test_agents/ces-agents-test-dev/Info_gatherer \
                       --project_id ${{ env.PROJECT_ID }} \
