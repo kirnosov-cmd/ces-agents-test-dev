@@ -30,6 +30,17 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: false
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: true
+          swap-storage: true
+
       # Authentication is handled via the CXAS_OAUTH_TOKEN environment variable defined above.
       # No separate auth step is necessary.
 
