@@ -1,6 +1,10 @@
 name: "CI Test Info_gatherer"
 
 on:
+  push:
+    paths:
+      - 'Info_gatherer/**/*.yaml'
+      - 'Info_gatherer/**/*.json'
   pull_request:
     paths:
       - 'Info_gatherer/**/*.yaml'
