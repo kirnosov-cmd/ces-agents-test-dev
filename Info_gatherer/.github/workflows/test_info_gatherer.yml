@@ -1,6 +1,7 @@
 name: "CI Test Info_gatherer"
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'Info_gatherer/**/*.yaml'
