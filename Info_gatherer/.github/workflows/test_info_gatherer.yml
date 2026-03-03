@@ -26,11 +26,7 @@ jobs:
       # Authentication is handled via the CXAS_OAUTH_TOKEN environment variable defined above.
       # No separate auth step is necessary.
 
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2
 
-      - name: Configure Docker Auth
-        run: gcloud auth configure-docker us-central1-docker.pkg.dev
 
 
       - name: Set up Docker Buildx
