@@ -1,4 +1,4 @@
-displayName: Information Gatherer
+displayName: Info Gatherer OAuth Test
 rootAgent: root_agent
 audioProcessingConfig:
   synthesizeSpeechConfigs:
