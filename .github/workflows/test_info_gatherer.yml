@@ -1,4 +1,4 @@
-name: "CI Test Info gatherer oauth test 3"
+name: "CI Test Info_gatherer"
 
 on:
   pull_request:
@@ -13,7 +13,7 @@ env:
   CXAS_OAUTH_TOKEN: ${{ secrets.CXAS_OAUTH_TOKEN }}
 
 jobs:
-  test-info_gatherer_oauth_test_3:
+  test-info_gatherer:
     runs-on: ubuntu-latest
 
     permissions:
@@ -24,14 +24,21 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: false
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: true
+          swap-storage: true
+
       # Authentication is handled via the CXAS_OAUTH_TOKEN environment variable defined above.
       # No separate auth step is necessary.
 
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v2
 
-      - name: Configure Docker Auth
-        run: gcloud auth configure-docker us-central1-docker.pkg.dev
 
 
       - name: Set up Docker Buildx
@@ -40,7 +47,7 @@ jobs:
       - name: Build Docker Image
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: /usr/local/google/home/sethus/git_repos/test_agents/ces-agents-test-dev/Info_gatherer
           load: true
           tags: agent-image
           cache-from: type=gha
@@ -49,15 +56,14 @@ jobs:
       - name: Run CI Test Lifecycle (Docker)
         run: |
           docker run --rm \
-            -v ${ github.workspace }:/workspace \
+            -v ${{ github.workspace }}:/workspace \
             -w /workspace \
             -e PROJECT_ID=${{ env.PROJECT_ID }} \
             -e LOCATION=${{ env.LOCATION }} \
-            -e GOOGLE_APPLICATION_CREDENTIALS=/workspace/application_default_credentials.json \
-            -v ${ steps.auth.outputs.credentials_file_path }:/workspace/application_default_credentials.json \
+            -e CXAS_OAUTH_TOKEN=${{ env.CXAS_OAUTH_TOKEN }} \
             agent-image \
-            ci-test --agent_dir /usr/local/google/home/sethus/git_repos/test_agents/ces-agents-test-dev/Info_gatherer/ \
+            ci-test --agent_dir /usr/local/google/home/sethus/git_repos/test_agents/ces-agents-test-dev/Info_gatherer \
                       --project_id ${{ env.PROJECT_ID }} \
                       --location ${{ env.LOCATION }} \
-                      --display_name "[CI] PR-${{ github.event.pull_request.number }} Info gatherer oauth test 3"
+                      --display_name "[CI] PR-${{ github.event.pull_request.number }} Info_gatherer"
 
