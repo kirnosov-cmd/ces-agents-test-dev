@@ -5,10 +5,12 @@ on:
     paths:
       - 'Info_gatherer/**/*.yaml'
       - 'Info_gatherer/**/*.json'
+      - '.github/workflows/test_info_gatherer.yml'
   pull_request:
     paths:
       - 'Info_gatherer/**/*.yaml'
       - 'Info_gatherer/**/*.json'
+      - '.github/workflows/test_info_gatherer.yml'
 
 env:
   PROJECT_ID: "cloud-es-kalyan"
