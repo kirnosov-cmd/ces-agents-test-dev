@@ -3,6 +3,9 @@ name: "Cleanup Information gatherer"
 on:
   pull_request:
     types: [closed]
+    paths:
+      - 'Info_gatherer/**/*.yaml'
+      - 'Info_gatherer/**/*.json'
 
 env:
   PROJECT_ID: "YOUR_PROJECT_ID"
@@ -13,6 +16,7 @@ env:
 jobs:
   cleanup-information_gatherer:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true || github.event.pull_request.closed == true
 
     permissions:
       contents: 'read'
@@ -44,12 +48,10 @@ jobs:
           python -m pip install --upgrade pip
           wget https://storage.googleapis.com/gassets-api-ai/ces-client-libraries/v1beta/ces-v1beta-py.tar
           pip install ces-v1beta-py.tar --quiet
-          gsutil cp gs://cxas-scrapi/dist/cxas_scrapi-0.1.0-py3-none-any.whl .
-          pip install cxas_scrapi-0.1.0-py3-none-any.whl
+          pip install cxas-scrapi
 
-      - name: Delete Temp Agent
+      - name: Run Cleanup
         run: |
           cxas-eval delete --display_name "[CI] PR-${{ github.event.pull_request.number }} Information gatherer" \
-                           --project_id ${{ env.PROJECT_ID }} \
-                           --location ${{ env.LOCATION }} \
-                           --force
+                   --project_id ${{ env.PROJECT_ID }} \
+                   --location ${{ env.LOCATION }}

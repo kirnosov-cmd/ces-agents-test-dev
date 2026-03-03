@@ -9,8 +9,7 @@ on:
 env:
   PROJECT_ID: "cloud-es-kalyan"
   LOCATION: "global"
-  # Store your OAuth Token string in GitHub Secrets
-  CXAS_OAUTH_TOKEN: ${{ secrets.CXAS_OAUTH_TOKEN }}
+  CXAS_OAUTH_TOKEN: "ya29.a0ATkoCc6rGqz9w3ADRbBaKL4wSiJ_U7qFmS3o_mqPILYKa6YoDEnq2MHZCeuVO6cAX7VY638qZz3dDV5rLd17apw3YHDXggw2ZDdY9_CmX4hbuWM5FlpT3Q_OWUM-3MUbSTBmpo7mQgS92pdhFB4j7sCtS_P13DD1IHn6R8Hcnm1FDpjQS_3Lqf8H1pCbVIdAN0_GeVQ9ugAfbPQaCgYKAdMSARISFQHGX2MizOp2x8BTcLx40Y9Hl-Xhqw0214"
 
 jobs:
   test-info_gatherer:
