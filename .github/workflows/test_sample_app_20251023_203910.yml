@@ -1,10 +1,9 @@
 name: "CI Test Sample_app_20251023_203910"
 
 on:
-  pull_request:
-    paths:
-      - 'sample_app_20251023_203910/**/*.yaml'
-      - 'sample_app_20251023_203910/**/*.json'
+  push:
+    branches:
+      - trigger-ci-test
 
 env:
   PROJECT_ID: "wire-box"
