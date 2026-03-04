@@ -8,8 +8,8 @@ on:
 env:
   PROJECT_ID: "wire-box"
   LOCATION: "global"
-  # Store your OAuth Token string in GitHub Secrets
-  CXAS_OAUTH_TOKEN: ${{ secrets.CXAS_OAUTH_TOKEN }}
+  GCP_WORKLOAD_IDENTITY_PROVIDER: "projects/1023312446694/locations/global/workloadIdentityPools/github-actions-pool/providers/github-provider"
+  GCP_SERVICE_ACCOUNT: "github-actions-sa@wire-box.iam.gserviceaccount.com" 
 
 jobs:
   test-sample_app_20251023_203910:
@@ -34,10 +34,20 @@ jobs:
           docker-images: true
           swap-storage: true
 
-      # Authentication is handled via the CXAS_OAUTH_TOKEN environment variable defined above.
-      # No separate auth step is necessary.
+      # Authenticate to Google Cloud via Workload Identity Federation
+      # See https://github.com/google-github-actions/auth for configuration instructions
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ env.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
 
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
 
+      - name: Configure Docker Auth
+        run: gcloud auth configure-docker us-central1-docker.pkg.dev
 
 
       - name: Set up Docker Buildx
@@ -59,7 +69,8 @@ jobs:
             -w /workspace \
             -e PROJECT_ID=${{ env.PROJECT_ID }} \
             -e LOCATION=${{ env.LOCATION }} \
-            -e CXAS_OAUTH_TOKEN=${{ env.CXAS_OAUTH_TOKEN }} \
+            -e GOOGLE_APPLICATION_CREDENTIALS=/workspace/application_default_credentials.json \
+            -v ${{ steps.auth.outputs.credentials_file_path }}:/workspace/application_default_credentials.json \
             agent-image \
             ci-test --agent_dir sample_app_20251023_203910 \
                       --project_id ${{ env.PROJECT_ID }} \
