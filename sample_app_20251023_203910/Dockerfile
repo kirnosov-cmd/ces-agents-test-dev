@@ -13,8 +13,9 @@ RUN wget https://storage.googleapis.com/gassets-api-ai/ces-client-libraries/v1be
     pip install ces-v1beta-py.tar --quiet && \
     rm ces-v1beta-py.tar
 
-# Copy requirements first to leverage Docker cache
+# Copy local libs and requirements first to leverage Docker cache
 COPY requirements.txt .
+COPY libs ./libs
 
 # Install dependencies - Cached Layer
 RUN pip install --no-cache-dir -r requirements.txt
