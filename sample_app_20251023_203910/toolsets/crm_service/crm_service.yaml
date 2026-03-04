@@ -1,0 +1,8 @@
+displayName: crm_service
+openApiToolset:
+  openApiSchema: toolsets/crm_service/open_api_toolset/open_api_schema.yaml
+  apiAuthentication:
+    serviceAgentIdTokenAuthConfig: {}
+description: Used to look up information about the user's current cart information
+  and also get recommendations on items based on the users current plant or flower
+  choices.

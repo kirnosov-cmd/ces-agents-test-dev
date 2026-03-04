@@ -1,0 +1,104 @@
+displayName: Off Topic - Organic Pet Food
+golden:
+  turns:
+  - steps:
+    - userInput:
+        text: hey
+    - expectation:
+        toolCall:
+          id: adk-845e9474-36f0-4cb4-9ea9-974e5aae1f04
+          tool: greeting
+          args: {}
+          displayName: greeting
+    - expectation:
+        toolResponse:
+          id: adk-845e9474-36f0-4cb4-9ea9-974e5aae1f04
+          tool: greeting
+          response:
+            result:
+              cart_information:
+                results:
+                  items:
+                  - name: Standard Potting Soil
+                    product_id: soil-123
+                    quantity: 1.0
+                  - name: General Purpose Fertilizer
+                    product_id: fert-456
+                    quantity: 1.0
+                  subtotal: 25.98
+              greeting: Hi there! Welcome to Cymbal Garden. Is this Patrick?
+          displayName: greeting
+    - expectation:
+        agentResponse:
+          role: cymbal_retail_agent
+          chunks:
+          - text: Welcome back, Patrick! I see you've already got some items in your
+              Cymbal Home & Garden cart. How can I help you today?
+  - steps:
+    - userInput:
+        text: my friend was saying you guys sell organic pet food at the store, is
+          that true? I couldn't find it online...
+    - expectation:
+        agentTransfer:
+          targetAgent: out_of_scope_handling
+          displayName: out_of_scope_handling
+    - expectation:
+        agentResponse:
+          role: out_of_scope_handling
+          chunks:
+          - text: "Thanks for trying out our<a href=\"https://cloud.google.com/customer-engagement-ai/conversational-agents/\"\
+              \ target=\"_blank\">Next Gen CES agent building platform</a>!\n    \
+              \        \nI'm a sample agent designed to be an educational tool, showing\
+              \ some best practices for building agents on our platform.\n\nSince\
+              \ you've ventured off the main path, let me take a moment to highlight\
+              \ some key features of our platform you can explore in the UI:\n\n*\
+              \   ⚒️ **Build Mode:** This is your current view. Here you can preview\
+              \ your agent in our simulator (where we're talking now!), build multi-agent\
+              \ architectures, add tools, set up guardrails, and manage version control\
+              \ for your agent application. Check out the right tool bar for more\
+              \ settings.\n*   📋 **Evaluate Mode:** This mode allows you to test\
+              \ and understand the performance of the agent you are building. We've\
+              \ preloaded some evaluations for you to look into. You can find the\
+              \ Evaluate Mode at the top of the screen.\n*   🚀 **Deploy Mode:** This\
+              \ mode allows you to deploy your agent to the world using our web chat\
+              \ interface, telephony integrations, or our API. You can find the Deploy\
+              \ Mode at the top of the screen, next to Evaluate.\n\nI will now transfer\
+              \ you back to the main retail agent to continue the conversation."
+    - expectation:
+        agentTransfer:
+          targetAgent: cymbal_retail_agent
+          displayName: cymbal_retail_agent
+    - expectation:
+        agentResponse:
+          role: cymbal_retail_agent
+          chunks:
+          - text: Now that we've clarified that, is there anything I can help you
+              with regarding plant identification or product recommendations?
+  - steps:
+    - userInput:
+        text: ah ok ok, just a demo.
+    - expectation:
+        agentResponse:
+          role: agent
+          chunks:
+          - text: Sounds good! Is there anything else I can help you with today? Perhaps
+              with your current cart or some product recommendations?
+  - steps:
+    - userInput:
+        text: nah I'm good, have a nice day! bye
+    - expectation:
+        toolCall:
+          id: adk-64dbb039-ef53-438f-9403-c8335db71f66
+          tool: end_session
+          args:
+            escalation: false
+            status: success
+          displayName: end_session
+    - expectation:
+        toolResponse:
+          id: adk-64dbb039-ef53-438f-9403-c8335db71f66
+          tool: end_session
+          response:
+            result: done
+          displayName: end_session
+invalid: true

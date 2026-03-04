@@ -1,0 +1,5 @@
+pythonFunction:
+  name: ask_to_modify_cart
+  pythonCode: tools/ask_to_modify_cart/python_function/python_code.py
+  description: Confirm with the customer that it is ok to modify their cart.
+displayName: ask_to_modify_cart

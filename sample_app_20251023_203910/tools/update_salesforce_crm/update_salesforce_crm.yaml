@@ -1,0 +1,5 @@
+pythonFunction:
+  name: update_salesforce_crm
+  pythonCode: tools/update_salesforce_crm/python_function/python_code.py
+  description: Updates the Salesforce CRM with the most recent conversation details.
+displayName: update_salesforce_crm

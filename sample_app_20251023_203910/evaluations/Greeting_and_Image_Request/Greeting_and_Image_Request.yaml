@@ -1,0 +1,83 @@
+displayName: Greeting and Image Request
+golden:
+  turns:
+  - steps:
+    - userInput:
+        text: hi
+    - expectation:
+        toolCall:
+          id: adk-15ea5f82-a46c-4dad-9d07-7cdbcc6f4181
+          tool: greeting
+          args: {}
+          displayName: greeting
+    - expectation:
+        toolResponse:
+          id: adk-15ea5f82-a46c-4dad-9d07-7cdbcc6f4181
+          tool: greeting
+          response:
+            result:
+              cart_information:
+                results:
+                  items:
+                  - name: Standard Potting Soil
+                    product_id: soil-123
+                    quantity: 1.0
+                  - name: General Purpose Fertilizer
+                    product_id: fert-456
+                    quantity: 1.0
+                  subtotal: 25.98
+              greeting: Hi there! Welcome to Cymbal Garden. Is this Patrick?
+          displayName: greeting
+    - expectation:
+        agentResponse:
+          role: cymbal_retail_agent
+          chunks:
+          - text: Welcome back, Patrick! I see you've already got some items in your
+              Cymbal Home & Garden cart. How can I help you today?
+  - steps:
+    - userInput:
+        text: can you help me with getting the right potting soil and fertilizer for
+          my plants I just bought?
+    - expectation:
+        toolCall:
+          id: adk-0a9f2d9a-3f17-4027-b0a3-712c381b6c83
+          tool: request_image_upload
+          args:
+            customer_id: '428765091'
+          displayName: request_image_upload
+    - expectation:
+        toolResponse:
+          id: adk-0a9f2d9a-3f17-4027-b0a3-712c381b6c83
+          tool: request_image_upload
+          response:
+            result:
+              status: success
+          displayName: request_image_upload
+    - expectation:
+        agentResponse:
+          role: cymbal_retail_agent
+          chunks:
+          - text: Yes, I can certainly help you with that! The best way to recommend
+              the right potting soil and fertilizer is if I can see your new plants.
+              Would you mind uploading a picture of them for me?
+  - steps:
+    - userInput:
+        text: actually I need to run. bye
+    - expectation:
+        toolCall:
+          id: adk-e0e926cc-32a2-43f1-83a5-b24a5c431aab
+          tool: end_session
+          args:
+            reason: customer_request
+    - expectation:
+        toolResponse:
+          id: adk-e0e926cc-32a2-43f1-83a5-b24a5c431aab
+          tool: end_session
+          response:
+            result: done
+    - expectation:
+        agentResponse:
+          role: agent
+          chunks:
+          - text: No problem, come back when you have time!
+invalid: true

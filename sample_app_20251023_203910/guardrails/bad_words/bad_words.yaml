@@ -1,0 +1,15 @@
+displayName: bad words
+description: block and redirect for bad language
+enabled: true
+action:
+  respondImmediately:
+    responses:
+    - text: Let's keep the language clean and appropriate for this, okay? No need
+        for that kind of stuff in the future.
+contentFilter:
+  bannedContentsInUserInput:
+  - damnit
+  - dammit
+  - damn
+  - hell
+  matchType: WORD_BOUNDARY_STRING_MATCH
