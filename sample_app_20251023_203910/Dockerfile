@@ -15,6 +15,7 @@ RUN wget https://storage.googleapis.com/gassets-api-ai/ces-client-libraries/v1be
 
 # Copy requirements first to leverage Docker cache
 COPY requirements.txt .
+COPY libs/ libs/
 
 # Install dependencies - Cached Layer
 RUN pip install --no-cache-dir -r requirements.txt
