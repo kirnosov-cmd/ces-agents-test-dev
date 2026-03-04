@@ -1,0 +1,50 @@
+name: "Cleanup Sample_app_20251023_203910"
+
+on:
+  pull_request:
+    types: [closed]
+    paths:
+      - 'sample_app_20251023_203910/**/*.yaml'
+      - 'sample_app_20251023_203910/**/*.json'
+
+env:
+  PROJECT_ID: "wire-box"
+  LOCATION: "global"
+  # Store your OAuth Token string in GitHub Secrets
+  CXAS_OAUTH_TOKEN: ${{ secrets.CXAS_OAUTH_TOKEN }}
+
+jobs:
+  cleanup-sample_app_20251023_203910:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true || github.event.pull_request.closed == true
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # Authentication is handled via the CXAS_OAUTH_TOKEN environment variable defined above.
+      # No separate auth step is necessary.
+
+
+
+      - name: Install cxas-scrapi CLI
+        run: |
+          python -m pip install --upgrade pip
+          wget https://storage.googleapis.com/gassets-api-ai/ces-client-libraries/v1beta/ces-v1beta-py.tar
+          pip install ces-v1beta-py.tar --quiet
+          pip install cxas-scrapi
+
+      - name: Run Cleanup
+        run: |
+          cxas-eval delete --display_name "[CI] PR-${{ github.event.pull_request.number }} Sample_app_20251023_203910" \
+                   --project_id ${{ env.PROJECT_ID }} \
+                   --location ${{ env.LOCATION }}
