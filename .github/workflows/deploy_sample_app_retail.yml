@@ -13,8 +13,8 @@ env:
   LOCATION: "YOUR_LOCATION"
   APP_ID: "projects/YOUR_PROJECT_ID/locations/YOUR_LOCATION/apps/YOUR_APP_ID"
   DISPLAY_NAME: "Sample app retail"
-  GCP_WORKLOAD_IDENTITY_PROVIDER: "projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider"
-  GCP_SERVICE_ACCOUNT: "my-service-account@my-project.iam.gserviceaccount.com" 
+  GCP_WORKLOAD_IDENTITY_PROVIDER: "projects/1023312446694/locations/global/workloadIdentityPools/github-actions-pool/providers/github-provider"
+  GCP_SERVICE_ACCOUNT: "github-actions-sa@wire-box.iam.gserviceaccount.com" 
 
 jobs:
   deploy-sample_app_retail:
