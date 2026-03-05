@@ -1,4 +1,4 @@
-name: "Cleanup Sample_app_20251023_203910"
+name: "Cleanup Sample app retail"
 
 on:
   pull_request:
@@ -8,13 +8,13 @@ on:
       - 'sample_app_20251023_203910/**/*.json'
 
 env:
-  PROJECT_ID: "wire-box"
-  LOCATION: "global"
-  GCP_WORKLOAD_IDENTITY_PROVIDER: "projects/1023312446694/locations/global/workloadIdentityPools/github-actions-pool/providers/github-provider"
-  GCP_SERVICE_ACCOUNT: "github-actions-sa@wire-box.iam.gserviceaccount.com" 
+  PROJECT_ID: "YOUR_PROJECT_ID"
+  LOCATION: "YOUR_LOCATION"
+  GCP_WORKLOAD_IDENTITY_PROVIDER: "projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider"
+  GCP_SERVICE_ACCOUNT: "my-service-account@my-project.iam.gserviceaccount.com" 
 
 jobs:
-  cleanup-sample_app_20251023_203910:
+  cleanup-sample_app_retail:
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true || github.event.pull_request.closed == true
 
@@ -55,6 +55,6 @@ jobs:
 
       - name: Run Cleanup
         run: |
-          cxas-eval delete --display_name "[CI] PR-${{ github.event.pull_request.number }} Sample_app_20251023_203910" \
+          cxas-eval delete --display_name "[CI] PR-${{ github.event.pull_request.number }} Sample app retail" \
                    --project_id ${{ env.PROJECT_ID }} \
                    --location ${{ env.LOCATION }}

@@ -1,18 +1,19 @@
-name: "CI Test Sample_app_20251023_203910"
+name: "CI Test Sample app retail"
 
 on:
-  push:
-    branches:
-      - trigger-ci-test
+  pull_request:
+    paths:
+      - 'sample_app_20251023_203910/**/*.yaml'
+      - 'sample_app_20251023_203910/**/*.json'
 
 env:
-  PROJECT_ID: "wire-box"
-  LOCATION: "us"
-  GCP_WORKLOAD_IDENTITY_PROVIDER: "projects/1023312446694/locations/global/workloadIdentityPools/github-actions-pool/providers/github-provider"
-  GCP_SERVICE_ACCOUNT: "github-actions-sa@wire-box.iam.gserviceaccount.com" 
+  PROJECT_ID: "YOUR_PROJECT_ID"
+  LOCATION: "YOUR_LOCATION"
+  GCP_WORKLOAD_IDENTITY_PROVIDER: "projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider"
+  GCP_SERVICE_ACCOUNT: "my-service-account@my-project.iam.gserviceaccount.com" 
 
 jobs:
-  test-sample_app_20251023_203910:
+  test-sample_app_retail:
     runs-on: ubuntu-latest
 
     permissions:
@@ -75,5 +76,5 @@ jobs:
             ci-test --agent_dir sample_app_20251023_203910 \
                       --project_id ${{ env.PROJECT_ID }} \
                       --location ${{ env.LOCATION }} \
-                      --display_name "[CI] PR-${{ github.event.pull_request.number }} Sample_app_20251023_203910"
+                      --display_name "[CI] PR-${{ github.event.pull_request.number }} Sample app retail"
 

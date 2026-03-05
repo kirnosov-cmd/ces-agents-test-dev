@@ -1,4 +1,4 @@
-displayName: sample_app_20251023_203910
+displayName: "Sample App Retail"
 rootAgent: cymbal_retail_agent
 audioProcessingConfig:
   synthesizeSpeechConfigs:

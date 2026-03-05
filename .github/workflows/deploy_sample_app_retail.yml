@@ -1,0 +1,65 @@
+name: "Deploy Sample app retail"
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'sample_app_20251023_203910/**/*.yaml'
+      - 'sample_app_20251023_203910/**/*.json'
+
+env:
+  PROJECT_ID: "YOUR_PROJECT_ID"
+  LOCATION: "YOUR_LOCATION"
+  APP_ID: "projects/YOUR_PROJECT_ID/locations/YOUR_LOCATION/apps/YOUR_APP_ID"
+  DISPLAY_NAME: "Sample app retail"
+  GCP_WORKLOAD_IDENTITY_PROVIDER: "projects/123456789/locations/global/workloadIdentityPools/my-pool/providers/my-provider"
+  GCP_SERVICE_ACCOUNT: "my-service-account@my-project.iam.gserviceaccount.com" 
+
+jobs:
+  deploy-sample_app_retail:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # Authenticate to Google Cloud via Workload Identity Federation
+      # See https://github.com/google-github-actions/auth for configuration instructions
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ env.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ env.GCP_SERVICE_ACCOUNT }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker Auth
+        run: gcloud auth configure-docker us-central1-docker.pkg.dev
+
+      - name: Install cxas-scrapi CLI
+        run: |
+          python -m pip install --upgrade pip
+          wget https://storage.googleapis.com/gassets-api-ai/ces-client-libraries/v1beta/ces-v1beta-py.tar
+          pip install ces-v1beta-py.tar --quiet
+          gsutil cp gs://cxas-scrapi/dist/cxas_scrapi-0.1.0-py3-none-any.whl .
+          pip install cxas_scrapi-0.1.0-py3-none-any.whl
+
+      - name: Deploy to CX Agent Studio
+        run: |
+          cxas-eval deploy --agent_dir sample_app_20251023_203910 \
+                           --project_id ${{ env.PROJECT_ID }} \
+                           --location ${{ env.LOCATION }} \
+                           --app_id ${{ env.APP_ID }} \
+                           --display_name "${{ env.DISPLAY_NAME }}"
