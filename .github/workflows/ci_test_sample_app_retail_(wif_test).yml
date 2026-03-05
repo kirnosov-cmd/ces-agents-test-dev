@@ -1,4 +1,4 @@
-name: "CI Test Sample app retail"
+name: "CI Test Sample app retail (wif test)"
 
 on:
   pull_request:
@@ -13,7 +13,7 @@ env:
   GCP_SERVICE_ACCOUNT: "github-actions-sa@wire-box.iam.gserviceaccount.com" 
 
 jobs:
-  test-sample_app_retail:
+  test-sample_app_retail_(wif_test):
     runs-on: ubuntu-latest
 
     permissions:
@@ -76,5 +76,5 @@ jobs:
             ci-test --agent_dir sample_app_20251023_203910 \
                       --project_id ${{ env.PROJECT_ID }} \
                       --location ${{ env.LOCATION }} \
-                      --display_name "[CI] PR-${{ github.event.pull_request.number }} Sample app retail"
+                      --display_name "[CI] PR-${{ github.event.pull_request.number }} Sample app retail (wif test)"
 

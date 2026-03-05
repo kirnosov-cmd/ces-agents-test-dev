@@ -1,9 +1,8 @@
-name: "Deploy Sample app retail"
+name: "Cleanup Sample app retail (wif test)"
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
+    types: [closed]
     paths:
       - 'sample_app_20251023_203910/**/*.yaml'
       - 'sample_app_20251023_203910/**/*.json'
@@ -11,14 +10,13 @@ on:
 env:
   PROJECT_ID: "YOUR_PROJECT_ID"
   LOCATION: "YOUR_LOCATION"
-  APP_ID: "projects/YOUR_PROJECT_ID/locations/YOUR_LOCATION/apps/YOUR_APP_ID"
-  DISPLAY_NAME: "Sample app retail"
   GCP_WORKLOAD_IDENTITY_PROVIDER: "projects/1023312446694/locations/global/workloadIdentityPools/github-actions-pool/providers/github-provider"
   GCP_SERVICE_ACCOUNT: "github-actions-sa@wire-box.iam.gserviceaccount.com" 
 
 jobs:
-  deploy-sample_app_retail:
+  cleanup-sample_app_retail_(wif_test):
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true || github.event.pull_request.closed == true
 
     permissions:
       contents: 'read'
@@ -53,13 +51,10 @@ jobs:
           python -m pip install --upgrade pip
           wget https://storage.googleapis.com/gassets-api-ai/ces-client-libraries/v1beta/ces-v1beta-py.tar
           pip install ces-v1beta-py.tar --quiet
-          gsutil cp gs://cxas-scrapi/dist/cxas_scrapi-0.1.0-py3-none-any.whl .
-          pip install cxas_scrapi-0.1.0-py3-none-any.whl
+          pip install cxas-scrapi
 
-      - name: Deploy to CX Agent Studio
+      - name: Run Cleanup
         run: |
-          cxas-eval deploy --agent_dir sample_app_20251023_203910 \
-                           --project_id ${{ env.PROJECT_ID }} \
-                           --location ${{ env.LOCATION }} \
-                           --app_id ${{ env.APP_ID }} \
-                           --display_name "${{ env.DISPLAY_NAME }}"
+          cxas-eval delete --display_name "[CI] PR-${{ github.event.pull_request.number }} Sample app retail (wif test)" \
+                   --project_id ${{ env.PROJECT_ID }} \
+                   --location ${{ env.LOCATION }}
