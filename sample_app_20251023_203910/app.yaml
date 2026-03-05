@@ -1,4 +1,4 @@
-displayName: "Sample App Retail (WIF Test)"
+displayName: "Sample App Retail (E2E Test)"
 rootAgent: cymbal_retail_agent
 audioProcessingConfig:
   synthesizeSpeechConfigs:

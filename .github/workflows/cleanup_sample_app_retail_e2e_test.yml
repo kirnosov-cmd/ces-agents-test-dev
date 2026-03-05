@@ -1,4 +1,4 @@
-name: "Cleanup Sample app retail (wif test)"
+name: "Cleanup Sample app retail (e2e test)"
 
 on:
   pull_request:
@@ -14,7 +14,7 @@ env:
   GCP_SERVICE_ACCOUNT: "github-actions-sa@wire-box.iam.gserviceaccount.com" 
 
 jobs:
-  cleanup-sample_app_retail_wif_test:
+  cleanup-sample_app_retail_e2e_test:
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true || github.event.pull_request.closed == true
 
@@ -55,6 +55,6 @@ jobs:
 
       - name: Run Cleanup
         run: |
-          cxas-eval delete --display_name "[CI] PR-${{ github.event.pull_request.number }} Sample app retail (wif test)" \
+          cxas-eval delete --display_name "[CI] PR-${{ github.event.pull_request.number }} Sample app retail (e2e test)" \
                    --project_id ${{ env.PROJECT_ID }} \
                    --location ${{ env.LOCATION }}
