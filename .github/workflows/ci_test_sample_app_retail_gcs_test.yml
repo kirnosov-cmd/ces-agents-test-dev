@@ -5,6 +5,7 @@ on:
     paths:
       - 'sample_app_20251023_203910/**/*.yaml'
       - 'sample_app_20251023_203910/**/*.json'
+  workflow_call:
 
 env:
   PROJECT_ID: "wire-box"

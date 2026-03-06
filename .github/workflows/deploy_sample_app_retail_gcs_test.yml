@@ -17,7 +17,12 @@ env:
   GCP_SERVICE_ACCOUNT: "github-actions-sa@wire-box.iam.gserviceaccount.com" 
 
 jobs:
+  test-sample_app_retail_gcs_test:
+    uses: ./.github/workflows/ci_test_sample_app_retail_gcs_test.yml
+    secrets: inherit
+
   deploy-sample_app_retail_gcs_test:
+    needs: test-sample_app_retail_gcs_test
     runs-on: ubuntu-latest
 
     permissions:
