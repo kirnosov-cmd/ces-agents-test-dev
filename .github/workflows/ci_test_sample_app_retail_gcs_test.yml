@@ -1,4 +1,4 @@
-name: "CI Test Sample app retail (e2e test)"
+name: "CI Test Sample app retail (gcs test)"
 
 on:
   pull_request:
@@ -7,13 +7,13 @@ on:
       - 'sample_app_20251023_203910/**/*.json'
 
 env:
-  PROJECT_ID: "YOUR_PROJECT_ID"
-  LOCATION: "YOUR_LOCATION"
+  PROJECT_ID: "wire-box"
+  LOCATION: "global"
   GCP_WORKLOAD_IDENTITY_PROVIDER: "projects/1023312446694/locations/global/workloadIdentityPools/github-actions-pool/providers/github-provider"
   GCP_SERVICE_ACCOUNT: "github-actions-sa@wire-box.iam.gserviceaccount.com" 
 
 jobs:
-  test-sample_app_retail_e2e_test:
+  test-sample_app_retail_gcs_test:
     runs-on: ubuntu-latest
 
     permissions:
@@ -79,5 +79,5 @@ jobs:
             ci-test --agent_dir sample_app_20251023_203910 \
                       --project_id ${{ env.PROJECT_ID }} \
                       --location ${{ env.LOCATION }} \
-                      --display_name "[CI] PR-${{ github.event.pull_request.number }} Sample app retail (e2e test)"
+                      --display_name "[CI] PR-${{ github.event.pull_request.number }} Sample app retail (gcs test)"
 
