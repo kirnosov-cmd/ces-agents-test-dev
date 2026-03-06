@@ -13,12 +13,14 @@ RUN wget https://storage.googleapis.com/gassets-api-ai/ces-client-libraries/v1be
     pip install ces-v1beta-py.tar --quiet && \
     rm ces-v1beta-py.tar
 
+# Copy the CLI wheel downloaded by GitHub Actions into the container
+COPY cxas_scrapi-*.whl /dist/
+
 # Copy requirements first to leverage Docker cache
 COPY requirements.txt .
-COPY libs/ libs/
 
-# Install dependencies - Cached Layer
-RUN pip install --no-cache-dir -r requirements.txt
+# Install dependencies and local CLI wheel
+RUN pip install --no-cache-dir -r requirements.txt &&     pip install /dist/cxas_scrapi-*.whl
 
 # Copy the agent code into the container
 COPY . .
