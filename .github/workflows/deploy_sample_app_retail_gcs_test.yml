@@ -10,8 +10,8 @@ on:
 
 env:
   PROJECT_ID: "wire-box"
-  LOCATION: "global"
-  APP_ID: "projects/wire-box/locations/global/apps/sample_app_20251023_203910"
+  LOCATION: "us"
+  APP_ID: "projects/wire-box/locations/us/apps/sample_app_20251023_203910"
   DISPLAY_NAME: "Sample app retail (gcs test)"
   GCP_WORKLOAD_IDENTITY_PROVIDER: "projects/1023312446694/locations/global/workloadIdentityPools/github-actions-pool/providers/github-provider"
   GCP_SERVICE_ACCOUNT: "github-actions-sa@wire-box.iam.gserviceaccount.com" 

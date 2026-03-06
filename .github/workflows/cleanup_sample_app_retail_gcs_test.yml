@@ -9,7 +9,7 @@ on:
 
 env:
   PROJECT_ID: "wire-box"
-  LOCATION: "global"
+  LOCATION: "us"
   GCP_WORKLOAD_IDENTITY_PROVIDER: "projects/1023312446694/locations/global/workloadIdentityPools/github-actions-pool/providers/github-provider"
   GCP_SERVICE_ACCOUNT: "github-actions-sa@wire-box.iam.gserviceaccount.com" 
 

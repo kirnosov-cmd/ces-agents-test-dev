@@ -1,5 +1,4 @@
 displayName: "Sample App Retail (GCS Test)"
-name: "projects/wire-box/locations/global/apps/sample_app_20251023_203910"
 rootAgent: cymbal_retail_agent
 audioProcessingConfig:
   synthesizeSpeechConfigs:
