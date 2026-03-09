@@ -58,8 +58,8 @@ jobs:
           python -m pip install --upgrade pip
           wget https://storage.googleapis.com/gassets-api-ai/ces-client-libraries/v1beta/ces-v1beta-py.tar
           pip install ces-v1beta-py.tar --quiet
-          gsutil cp gs://cxas-scrapi/dist/cxas_scrapi-0.1.0-py3-none-any.whl .
-          pip install cxas_scrapi-0.1.0-py3-none-any.whl
+          gsutil cp gs://cxas-scrapi-github/cxas_scrapi-0.1.3-py3-none-any.whl .
+          pip install cxas_scrapi-0.1.3-py3-none-any.whl
 
       - name: Deploy to CX Agent Studio
         run: |
