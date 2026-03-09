@@ -190,5 +190,7 @@ evaluationMetricsThresholds:
     turnLevelMetricsThresholds:
       semanticSimilaritySuccessThreshold: 2
       overallToolInvocationCorrectnessThreshold: 0.75
-    expectationLevelMetricsThresholds:
-      toolInvocationParameterCorrectnessThreshold: 0.75
+      expectationLevelMetricsThresholds:
+        toolInvocationParameterCorrectnessThreshold: 0.75
+# CI trigger
+# trigger rerun

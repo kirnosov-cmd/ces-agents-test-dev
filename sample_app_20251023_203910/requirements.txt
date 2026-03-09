@@ -1,3 +1,2 @@
 # Add your agent dependencies here
-./libs/cxas_scrapi-0.1.2-py3-none-any.whl  # Local CLI wheel for CI/CD workflows
 # google-cloud-ces  # Uncomment if needed
