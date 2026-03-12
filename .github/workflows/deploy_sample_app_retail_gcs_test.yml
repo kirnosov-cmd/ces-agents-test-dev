@@ -1,20 +1,25 @@
-name: "Deploy Sample app retail (gcs test)"
+name: "Deploy Sample_app_retail_gcs_test"
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'sample_app_20251023_203910/**/*.yaml'
-      - 'sample_app_20251023_203910/**/*.json'
+      - '**/*.yaml'
+      - '**/*.yml'
+      - '**/*.json'
 
 env:
   PROJECT_ID: "wire-box"
   LOCATION: "us"
   APP_ID: "projects/wire-box/locations/us/apps/sample_app_20251023_203910"
-  DISPLAY_NAME: "Sample app retail (gcs test)"
+  DISPLAY_NAME: "Sample_app_retail_gcs_test"
   GCP_WORKLOAD_IDENTITY_PROVIDER: "projects/1023312446694/locations/global/workloadIdentityPools/github-actions-pool/providers/github-provider"
   GCP_SERVICE_ACCOUNT: "github-actions-sa@wire-box.iam.gserviceaccount.com" 
+
+permissions:
+  contents: 'read'
+  id-token: 'write'
 
 jobs:
   test-sample_app_retail_gcs_test:
@@ -63,8 +68,8 @@ jobs:
 
       - name: Deploy to CX Agent Studio
         run: |
-          cxas-eval deploy --agent_dir sample_app_20251023_203910 \
-                           --project_id ${{ env.PROJECT_ID }} \
-                           --location ${{ env.LOCATION }} \
-                           --app_id ${{ env.APP_ID }} \
-                           --display_name "${{ env.DISPLAY_NAME }}"
+          cxas-eval push --agent_dir . \
+                         --project_id ${{ env.PROJECT_ID }} \
+                         --location ${{ env.LOCATION }} \
+                         --app_id ${{ env.APP_ID }} \
+                         --display_name "${{ env.DISPLAY_NAME }}"
