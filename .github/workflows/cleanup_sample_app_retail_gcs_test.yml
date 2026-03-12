@@ -1,11 +1,11 @@
-name: "Cleanup Sample app retail (gcs test)"
+name: "Cleanup Sample_app_retail_gcs_test"
 
 on:
   pull_request:
     types: [closed]
     paths:
-      - 'sample_app_20251023_203910/**/*.yaml'
-      - 'sample_app_20251023_203910/**/*.json'
+      - '**/*.yaml'
+      - '**/*.json'
 
 env:
   PROJECT_ID: "wire-box"
@@ -56,6 +56,6 @@ jobs:
 
       - name: Run Cleanup
         run: |
-          cxas-eval delete --display_name "[CI] PR-${{ github.event.pull_request.number }} Sample app retail (gcs test)" \
+          cxas-eval delete --display_name "[CI] PR-${{ github.event.pull_request.number }} Sample_app_retail_gcs_test" \
                    --project_id ${{ env.PROJECT_ID }} \
                    --location ${{ env.LOCATION }}
