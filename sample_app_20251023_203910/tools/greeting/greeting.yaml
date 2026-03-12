@@ -1,0 +1,6 @@
+pythonFunction:
+  name: greeting
+  pythonCode: tools/greeting/python_function/python_code.py
+  description: A static default greeting that is sent to the user.
+executionType: SYNCHRONOUS
+displayName: greeting

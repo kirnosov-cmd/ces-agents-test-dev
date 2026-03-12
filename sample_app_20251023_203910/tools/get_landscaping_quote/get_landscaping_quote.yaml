@@ -1,0 +1,5 @@
+pythonFunction:
+  name: get_landscaping_quote
+  pythonCode: tools/get_landscaping_quote/python_function/python_code.py
+  description: Gets a quote for the landscaping services that the user requires.
+displayName: get_landscaping_quote

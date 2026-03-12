@@ -1,0 +1,13 @@
+displayName: Out of Scope Requests
+scenario:
+  task: |-
+    Your job is to ask the user about any of the various topics from the following list which are considered "out of scope" of what the agent is built to achieve"
+    - Discounts for plants or flowers
+    - Store Hours for Cymbal Home & Garden locations
+    - Return Policies for plants or flowers
+    - Purchasing new plants
+    - Purchasing garden tools or accessories (e.g. shovels, gloves, wheelbarrow, etc.)
+
+    If the agent provides messaging about being a demo or sample agent, be empathetic and follow along with the instructions.
+  maxTurns: 5
+  variableOverrides: {}

@@ -1,0 +1,106 @@
+displayName: Direct Recommendation No Image Upload
+golden:
+  turns:
+  - steps:
+    - userInput:
+        text: hi
+    - expectation:
+        toolCall:
+          id: adk-a53a4c08-59cb-430a-9abb-3e35682252d3
+          tool: greeting
+          args: {}
+          displayName: greeting
+    - expectation:
+        toolResponse:
+          id: adk-a53a4c08-59cb-430a-9abb-3e35682252d3
+          tool: greeting
+          response:
+            result:
+              cart_information:
+                results:
+                  items:
+                  - name: Standard Potting Soil
+                    product_id: soil-123
+                    quantity: 1.0
+                  - name: General Purpose Fertilizer
+                    product_id: fert-456
+                    quantity: 1.0
+                  subtotal: 25.98
+              greeting: Hi there! Welcome to Cymbal Garden. Is this Patrick?
+          displayName: greeting
+    - expectation:
+        agentResponse:
+          role: cymbal_retail_agent
+          chunks:
+          - text: Welcome back, Patrick! I see you've already got some items in your
+              Cymbal Home & Garden cart. How can I help you today?
+  - steps:
+    - userInput:
+        text: yeah I have 40 different petunias that I just bought in various colors
+          and I wanted to know if I'm getting the right potting soil and fertilizer
+          for them. can you see if what I have in my cart seems good?
+    - expectation:
+        toolCall:
+          id: adk-aa2c343d-66a5-47f5-a64a-fd96a9831d60
+          tool: get_product_recommendations
+          args:
+            plant_to_search: petunias
+          displayName: get_product_recommendations
+    - expectation:
+        toolResponse:
+          id: adk-aa2c343d-66a5-47f5-a64a-fd96a9831d60
+          tool: get_product_recommendations
+          response:
+            result:
+              recommendations:
+                results:
+                  recommendations:
+                  - description: Provides extra nutrients that Petunias love.
+                    name: Bloom Booster Potting Mix
+                    product_id: soil-456
+                  - description: Specifically formulated for flowering annuals.
+                    name: Flower Power Fertilizer
+                    product_id: fert-789
+              search_results:
+                answer:
+                - Petunias (Petunia ×atkinsiana) are flowering plants often grown
+                  as annuals in most regions, but can be tender perennials in USDA
+                  zones 9 to 11. They thrive in full sun, needing at least 6 hours
+                  of direct sunlight daily, and well-draining soil. Petunias are considered
+                  sustainable to grow, especially when using eco-friendly practices
+                  like organic soil amendments and avoiding peat-based products.
+                search_queries:
+                - petunias sustainable to grow
+                - petunias USDA plant database
+          displayName: get_product_recommendations
+    - expectation:
+        agentResponse:
+          role: cymbal_retail_agent
+          chunks:
+          - text: |-
+              Okay, I see you have petunias! For petunias, a "Bloom Booster Potting Mix" and "Flower Power Fertilizer" are often recommended because they provide the extra nutrients and specific formulation that flowering annuals like petunias love.
+
+              What do you think of these options?
+  - steps:
+    - userInput:
+        text: uhh I'll take a look at these later. I need to run right now. bye
+    - expectation:
+        agentResponse:
+          role: agent
+          chunks:
+          - text: Okay. Thanks for shopping with us at Cymbal Home & Garden. Have
+              a great day!
+    - expectation:
+        toolCall:
+          id: adk-f8702444-6e0e-4634-9589-d922f3bb900d
+          tool: end_session
+          args:
+            reason: customer_request
+            status: abandoned
+    - expectation:
+        toolResponse:
+          id: adk-f8702444-6e0e-4634-9589-d922f3bb900d
+          tool: end_session
+          response:
+            result: done
+invalid: true

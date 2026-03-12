@@ -1,0 +1,5 @@
+pythonFunction:
+  name: apply_discount_to_service
+  pythonCode: tools/apply_discount_to_service/python_function/python_code.py
+  description: Applies the discount to the specified services.
+displayName: apply_discount_to_service
