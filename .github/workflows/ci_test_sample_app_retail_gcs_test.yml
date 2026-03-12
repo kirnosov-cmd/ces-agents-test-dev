@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - '**/*.yaml'
+      - '**/*.yml'
       - '**/*.json'
   workflow_call:
 
